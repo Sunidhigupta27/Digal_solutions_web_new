@@ -272,8 +272,8 @@ export default function CertificationsGrid() {
             <div
               onClick={(e) => e.stopPropagation()}
               style={{
-                width: "min(92vw, 420px)",
-                height: "min(80vh, 560px)",
+                width: "min(85vw, 320px)",
+                height: "min(60vh, 420px)",
                 background: "#fff",
                 borderRadius: "12px",
                 overflow: "hidden",
@@ -313,12 +313,30 @@ export default function CertificationsGrid() {
                 </button>
               </div>
               <iframe
-                src={`${active.certificate}#toolbar=0&navpanes=0`}
+                src={`${active.certificate}#toolbar=0&navpanes=0&view=FitH`}
                 title={`${active.label} certificate`}
                 width="100%"
                 height="100%"
                 style={{ border: "none", flex: 1 }}
               />
+              <a
+                href={active.certificate}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "block",
+                  textAlign: "center",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: "var(--orange-400, #ff6b1a)",
+                  padding: "8px",
+                  borderTop: "1px solid rgba(10,23,48,0.08)",
+                  textDecoration: "none",
+                  flexShrink: 0,
+                }}
+              >
+                Open full certificate ↗
+              </a>
             </div>
           </div>,
           document.body
