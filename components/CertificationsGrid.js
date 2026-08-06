@@ -134,11 +134,9 @@
 //     </div>
 //   );
 // }
-
-
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 const certifications = [
@@ -149,8 +147,27 @@ const certifications = [
 ];
 
 export default function CertificationsGrid() {
-  const [hovered, setHovered] = useState(null);
+  const [hovered, setHovered] = useState(null);   // desktop hover preview
+  const [active, setActive] = useState(null);      // mobile tap modal
+  const [isMobile, setIsMobile] = useState(false);
   const closeTimer = useRef(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: none), (max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // lock background scroll while mobile modal is open
+  useEffect(() => {
+    if (active) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [active]);
 
   function clearCloseTimer() {
     if (closeTimer.current) {
@@ -165,9 +182,14 @@ export default function CertificationsGrid() {
   }
 
   function handleEnter(cert, e) {
+    if (isMobile) return;
     clearCloseTimer();
     const rect = e.currentTarget.getBoundingClientRect();
     setHovered({ cert, rect });
+  }
+
+  function handleCardClick(cert) {
+    if (isMobile) setActive(cert);
   }
 
   return (
@@ -178,6 +200,9 @@ export default function CertificationsGrid() {
           key={c.label}
           onMouseEnter={(e) => handleEnter(c, e)}
           onMouseLeave={scheduleClose}
+          onClick={() => handleCardClick(c)}
+          role={isMobile ? "button" : undefined}
+          tabIndex={isMobile ? 0 : undefined}
         >
           <div className="ci">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -188,7 +213,8 @@ export default function CertificationsGrid() {
         </div>
       ))}
 
-      {hovered &&
+      {/* Desktop hover preview */}
+      {!isMobile && hovered &&
         typeof document !== "undefined" &&
         createPortal(
           <div
@@ -197,7 +223,10 @@ export default function CertificationsGrid() {
             onMouseLeave={scheduleClose}
             style={{
               position: "fixed",
-              left: hovered.rect.left + hovered.rect.width / 2,
+              left: Math.min(
+                Math.max(hovered.rect.left + hovered.rect.width / 2, 150),
+                window.innerWidth - 150
+              ),
               top: hovered.rect.bottom + 12,
               transform: "translateX(-50%)",
               width: "280px",
@@ -206,18 +235,10 @@ export default function CertificationsGrid() {
               borderRadius: "8px",
               overflow: "hidden",
               background: "#fff",
+              zIndex: 1000,
             }}
           >
-            {/* invisible bridge so the mouse can travel from the card to the preview without a gap triggering close */}
-            <div
-              style={{
-                position: "absolute",
-                top: "-12px",
-                left: 0,
-                right: 0,
-                height: "12px",
-              }}
-            />
+            <div style={{ position: "absolute", top: "-12px", left: 0, right: 0, height: "12px" }} />
             <iframe
               src={`${hovered.cert.certificate}#toolbar=0&navpanes=0`}
               title={`${hovered.cert.label} certificate`}
@@ -226,6 +247,79 @@ export default function CertificationsGrid() {
               style={{ border: "none" }}
               tabIndex={0}
             />
+          </div>,
+          document.body
+        )}
+
+      {/* Mobile tap modal */}
+      {isMobile && active &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="cert-preview-backdrop"
+            onClick={() => setActive(null)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(10,23,48,0.55)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 1000,
+              padding: "20px",
+            }}
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                width: "min(92vw, 420px)",
+                height: "min(80vh, 560px)",
+                background: "#fff",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 12px 32px rgba(0,0,0,0.35)",
+                position: "relative",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "10px 14px",
+                  borderBottom: "1px solid rgba(10,23,48,0.1)",
+                  flexShrink: 0,
+                }}
+              >
+                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--navy-900, #0a1730)" }}>
+                  {active.label}
+                </span>
+                <button
+                  onClick={() => setActive(null)}
+                  aria-label="Close preview"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: 20,
+                    lineHeight: 1,
+                    cursor: "pointer",
+                    color: "var(--navy-900, #0a1730)",
+                    padding: "4px 8px",
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+              <iframe
+                src={`${active.certificate}#toolbar=0&navpanes=0`}
+                title={`${active.label} certificate`}
+                width="100%"
+                height="100%"
+                style={{ border: "none", flex: 1 }}
+              />
+            </div>
           </div>,
           document.body
         )}
