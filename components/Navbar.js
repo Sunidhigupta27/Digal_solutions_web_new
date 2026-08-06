@@ -113,12 +113,12 @@ export default function Navbar() {
             <span></span>
           </div>
           <div className="tb-right">
-            <a href="tel:+918458066713" title="Call">
+            <a href="tel:+91 73258 27077" title="Call">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
             </a>
-            <a href="mailto:digalsolutionsofficial@gmail.com" title="Email">
+            <a href="mailto:sanjit@digalsolutions@gmail.com" title="Email">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M22 6l-10 7L2 6" />
                 <path d="M2 6h20v12H2z" />
@@ -136,7 +136,7 @@ export default function Navbar() {
       <nav id="mainnav" className={scrolled ? "scrolled" : ""}>
         <div className="navwrap">
           <Link href="/" className="nav-logo">
-            <Image src="/logo.png" alt="Digal Solutions" width={177} height={160} priority />
+            <Image src="/logo.png" alt="Digal Solutions" width={177} height={160} style={{ height: 38, width: "auto" }} priority />
           </Link>
           <ul className="nav-links">
             <li><Link href="/">Home</Link></li>

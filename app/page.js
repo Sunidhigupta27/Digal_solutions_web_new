@@ -363,25 +363,47 @@ export default function HomePage() {
           </div>
           <div className="test-grid reveal">
             {[
-              { q: "Digal's security team integrated smoothly with our site protocols — reporting is consistent and response time to incidents has been fast.", who: "Operations Manager", org: "Power Sector Client", av: "OM" },
-              { q: "The facility management crew has kept our plant premises consistently clean and audit-ready across multiple statutory inspections.", who: "Facility Head", org: "Manufacturing Client", av: "FH" },
-              { q: "GPS-tracked patrols and digital reporting gave our safety team visibility we simply didn't have with our previous manpower vendor.", who: "HSE Coordinator", org: "Infrastructure Client", av: "HS" },
-            ].map((t) => (
-              <div className="test-card" key={t.av}>
-                <div className="quote-i"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 7H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3v3a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5V8a1 1 0 0 0-1-1zM20 7h-5a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3v3a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5V8a1 1 0 0 0-1-1z" /></svg></div>
-                <p>{t.q}</p>
-                <div className="who">
-                  <div className="avatar">{t.av}</div>
-                  <div><h5>{t.who}</h5><span>{t.org}</span></div>
-                </div>
-              </div>
-            ))}
+  {
+    q: "DIGAL SOLUTIONS has successfully provided Security Services across multiple Odisha Hydro Power Corporation (OHPC) projects by deploying Security Officers, Assistant Security Officers, Gunmen, and Security Guards to safeguard critical hydroelectric infrastructure and ensure uninterrupted operations.",
+    who: "Odisha Hydro Power Corporation (OHPC)",
+    org: "Hydroelectric Power Projects",
+    av: "OH"
+  },
+  {
+    q: "DIGAL SOLUTIONS has been a trusted service partner for Larsen & Toubro (L&T), delivering Security Services, Housekeeping, and Operations & Maintenance (O&M) manpower for large-scale infrastructure and industrial projects with professionalism and reliability.",
+    who: "Larsen & Toubro (L&T)",
+    org: "Infrastructure & O&M Projects",
+    av: "LT"
+  },
+  {
+    q: "DIGAL SOLUTIONS deployed over 120 trained housekeeping professionals for LIC of India, Berhampur Division, ensuring clean, hygienic, and well-maintained office facilities while supporting efficient day-to-day operations.",
+    who: "LIC of India",
+    org: "Housekeeping Services",
+    av: "LIC"
+  },
+].map((t) => (
+  <div className="test-card" key={t.av}>
+    <div className="quote-i">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9 7H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3v3a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5V8a1 1 0 0 0-1-1zM20 7h-5a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3v3a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5V8a1 1 0 0 0-1-1z" />
+      </svg>
+    </div>
+    <p>{t.q}</p>
+    <div className="who">
+      <div className="avatar">{t.av}</div>
+      <div>
+        <h5>{t.who}</h5>
+        <span>{t.org}</span>
+      </div>
+    </div>
+  </div>
+))}
           </div>
         </div>
       </section>
 
       {/* ================= CLIENTS ================= */}
-      <section id="clients" style={{ padding: "48px 0" }}>
+      <section id="clients" style={{ paddig: "48px 0" ,}}>
         <div className="wrap">
           <p style={{ textAlign: "center", fontFamily: "var(--font-plex-mono), monospace", fontSize: 12, letterSpacing: ".08em", color: "var(--steel-500)", marginBottom: 26 }}>
             TRUSTED BY LEADING INDUSTRIAL ORGANISATIONS
