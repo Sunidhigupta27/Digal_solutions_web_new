@@ -2,7 +2,6 @@ import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const spaceGrotesk = Space_Grotesk({
@@ -42,7 +41,6 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
-        <WhatsAppFloat />
         <ScrollReveal />
       </body>
     </html>

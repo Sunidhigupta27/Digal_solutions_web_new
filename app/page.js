@@ -445,7 +445,7 @@ export default function HomePage() {
               </div>
               <div className="c-info-item">
                 <div className="ci-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.5 3a5.5 5.5 0 0 0-5.5 5.5c0 1.6.6 2.9 1.7 4l-8 8 2.3 2.3 8-8c1.1 1.1 2.4 1.7 4 1.7A5.5 5.5 0 1 0 17.5 3z" /></svg></div>
-                <div><h5>WHATSAPP</h5><a href="https://wa.me/918458066713" target="_blank" rel="noreferrer">Chat with our team</a></div>
+                <div><h5>WHATSAPP</h5><a href="https://wa.me/917325827077" target="_blank" rel="noreferrer">Chat with our team</a></div>
               </div>
             </div>
             <ContactForm />

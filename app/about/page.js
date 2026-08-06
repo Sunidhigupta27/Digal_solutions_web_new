@@ -15,7 +15,7 @@ export default function AboutPage() {
         <div className="wrap ph-inner">
           <div className="crumbs"><Link href="/">Home</Link> / About Us</div>
           <span className="eyebrow on-dark">WHO WE ARE</span>
-          <TypewriterHeading
+   <TypewriterHeading
   text="Thirteen years of building a workforce partner that industry can rely on."
   style={{ marginTop: 14 }}
 />
